@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Plus, Settings, LogOut, User } from "lucide-react";
+import { Plus, LogOut, User } from "lucide-react";
 import NotesList from "@/components/NotesList";
 import FloatingAIButton from "@/components/FloatingAIButton";
 import Link from "next/link";
