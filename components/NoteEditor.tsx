@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { Note } from "@/lib/stores/notesSlice";
 import { useNotes } from "@/lib/hooks/useNotes";
 import { useAuth } from "@/components/providers/AuthProvider";
-import { useEditor, EditorContent, Editor } from "@tiptap/react";
+import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import { unified } from "unified";
@@ -140,17 +140,17 @@ const NoteEditor = ({ existingNote, onSave }: NoteEditorProps) => {
   }, [existingNote, editor]);
 
   // Helper function to handle new content from AI or other sources
-  const setMarkdownContent = async (markdown: string) => {
-    if (!editor || editor.isDestroyed) return;
+  // const setMarkdownContent = async (markdown: string) => {
+  //   if (!editor || editor.isDestroyed) return;
 
-    try {
-      const html = await markdownToHTML(markdown);
-      editor.commands.setContent(html);
-    } catch (err) {
-      console.error("Error setting markdown content:", err);
-      editor.commands.setContent(markdown);
-    }
-  };
+  //   try {
+  //     const html = await markdownToHTML(markdown);
+  //     editor.commands.setContent(html);
+  //   } catch (err) {
+  //     console.error("Error setting markdown content:", err);
+  //     editor.commands.setContent(markdown);
+  //   }
+  // };
 
   const handleSummarize = async (
     noteId: null | string,
@@ -355,8 +355,8 @@ const NoteEditor = ({ existingNote, onSave }: NoteEditorProps) => {
         <Button
           onClick={(e) =>
             handleSummarize(
-              existingNote?.id,
-              editor?.getHTML() || existingNote?.content,
+              existingNote?.id ?? null,
+              editor?.getHTML() || existingNote?.content || "",
               e
             )
           }

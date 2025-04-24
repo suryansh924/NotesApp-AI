@@ -7,7 +7,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-import { Session, User } from "@supabase/supabase-js";
+import { Session, User, AuthError } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
@@ -49,7 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           setSession(session);
           setUser(session.user);
         }
-      } catch (error) {
+      } catch (error: unknown) {
         console.error("Error fetching session:", error);
         setError("Failed to fetch user session.");
       } finally {
@@ -94,9 +94,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (data.session) {
         router.push("/");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error signing in:", error);
-      setError(error?.message || "Failed to sign in");
+      setError(
+        error instanceof AuthError ? error.message : "Failed to sign in"
+      );
     } finally {
       setIsLoading(false);
     }
@@ -116,11 +118,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       if (data.session) {
-        // If autoconfirm is on, we'll get a session directly
         router.push("/");
       } else if (data.user) {
-        // If there's no session but the user was created successfully,
-        // sign them in directly instead of showing the confirmation message
         const { data: signInData, error: signInError } =
           await supabase.auth.signInWithPassword({
             email,
@@ -135,9 +134,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           router.push("/");
         }
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error signing up:", error);
-      setError(error?.message || "Failed to sign up");
+      setError(
+        error instanceof AuthError ? error.message : "Failed to sign up"
+      );
     } finally {
       setIsLoading(false);
     }
@@ -157,9 +158,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (error) {
         throw error;
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error signing in with Google:", error);
-      setError(error?.message || "Failed to sign in with Google");
+      setError(
+        error instanceof AuthError
+          ? error.message
+          : "Failed to sign in with Google"
+      );
       setIsLoading(false);
     }
   };
@@ -175,9 +180,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       router.push("/auth/login");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error signing out:", error);
-      setError(error?.message || "Failed to sign out");
+      setError(
+        error instanceof AuthError ? error.message : "Failed to sign out"
+      );
     } finally {
       setIsLoading(false);
     }

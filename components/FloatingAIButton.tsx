@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mic, ArrowUpRight, Paperclip, ArrowUp } from "lucide-react";
+import { Mic, ArrowUpRight, ArrowUp } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Sheet,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Trash2, Edit, MoreHorizontal, Loader2 } from "lucide-react";
+import { Search, Trash2, MoreHorizontal, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,7 +24,7 @@ import { useNotes } from "@/lib/hooks/useNotes";
 import { useRouter } from "next/navigation";
 
 const NotesList = () => {
-  const { notes, isLoading, deleteNote, updateNote } = useNotes();
+  const { notes, isLoading, deleteNote } = useNotes();
   const [searchQuery, setSearchQuery] = useState("");
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedNoteId, setSelectedNoteId] = useState<string | null>(null);
