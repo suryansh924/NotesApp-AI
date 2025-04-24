@@ -350,7 +350,12 @@ const NoteEditor = ({ existingNote, onSave }: NoteEditorProps) => {
           </div>
         )}
       </div>
-
+      {!hasEnoughContent && (
+        <div className="text-sm text-red-500 mt-2 align-center">
+          Please add more content to your note for summary (minimum 200
+          characters needed).
+        </div>
+      )}
       <div className="flex justify-end mt-2">
         <Button
           onClick={(e) =>
@@ -361,12 +366,12 @@ const NoteEditor = ({ existingNote, onSave }: NoteEditorProps) => {
             )
           }
           className="flex gap-2 mr-4"
-          disabled={isSummarizing || !hasEnoughContent || !editor?.getHTML()}
           title={
             !hasEnoughContent
               ? "Content is too short to summarize (minimum 200 characters needed)"
-              : ""
+              : "Summarize Note"
           }
+          disabled={isSummarizing || !hasEnoughContent || !editor?.getHTML()}
         >
           {isSummarizing ? (
             <div className="h-5 w-5 animate-spin rounded-full border-t-2 border-white"></div>
