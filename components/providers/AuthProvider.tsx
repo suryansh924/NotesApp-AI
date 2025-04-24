@@ -149,8 +149,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(true);
       setError(null);
 
-      const redirectTo = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
-      
+      const redirectTo =
+        process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
