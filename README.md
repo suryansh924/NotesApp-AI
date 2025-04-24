@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Notes App
+
+A modern note-taking application with AI-powered features built using Next.js 14, Redux, and OpenAI integration.
+
+## Features
+
+- Rich text editing with Tiptap editor and Markdown support
+- AI-powered note summarization
+- Voice recognition for hands-free note creation
+- Dark/light mode support
+- Real-time note saving with Redux Persist
+- Responsive design for all devices
+
+## Tech Stack
+
+- **Frontend**: Next.js 14, React, Tailwind CSS, shadcn/ui components
+- **Editor**: Tiptap with React
+- **State Management**: Redux Toolkit with Redux Persist
+- **AI Integration**: OpenAI API for summarization and content generation
+- **Styling**: Tailwind CSS with custom utilities
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18.x or later
+- npm or yarn
+- OpenAI API key
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/ai-notes-app.git
+cd ai-notes-app
+```
+
+2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables
+Create a `.env.local` file in the root directory and add:
+```
+NEXT_PUBLIC_SUPABASE_URL= your_supabase_url_here
+NEXT_PUBLIC_SUPABASE_ANON_KEY= your_supabase_anon_key_here
+NEXT_PUBLIC_OPENAI_API_KEY= your_openai_api_key_here
+NEXT_PUBLIC_SITE_URL= your_site_url_here || localhost url
+```
+
+4. Run the development server
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Application Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Key Components
 
-## Learn More
+- **NoteEditor**: Rich text editor with AI summarization capabilities
+- **NotesList**: List of all notes with search functionality
+- **VoiceRecognition**: Speech-to-text for creating notes via voice
+- **Redux Store**: Notes management with persistence
 
-To learn more about Next.js, take a look at the following resources:
+### AI Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Text Summarization**: Generate concise summaries of long notes
+- **Content Generation**: Create template-based notes with AI assistance
+- **Voice Transcription**: Convert speech to written notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Implementation Details
 
-## Deploy on Vercel
+The application follows a modern architecture with:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- App Router for page routing
+- Redux for state management with local storage persistence
+- OpenAI API integration for intelligent text processing
+- Tiptap for rich text editing
+- Responsive UI with Tailwind CSS and shadcn components
+- Voice recognition API for speech input
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+The application is deployed to Vercel:
+https://notes-app-ai-three.vercel.app
+
+## Future Improvements
+
+- Productivity templates generation using AI with checkboxes and potential tables
+- Note sharing and collaboration features
+- Categories and tags for better organization
+- Enhanced UI and theme customization
+- Tranformation into a PWA with offline support
